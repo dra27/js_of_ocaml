@@ -19,6 +19,8 @@
  *)
 open! Stdlib
 
+let wasted_memory = ref []
+
 module Make (N : sig
   type t
 end)
@@ -240,6 +242,7 @@ struct
         else iterate g f v w
 
     let rec traverse g to_visit stack x =
+      wasted_memory := Array.init 5 ~f:(fun _ -> 42) :: !wasted_memory;
       if NSet.mem to_visit x
       then (
         NSet.remove to_visit x;
