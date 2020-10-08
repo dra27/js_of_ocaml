@@ -22,6 +22,7 @@ open! Js_of_ocaml_compiler.Stdlib
 open Js_of_ocaml_compiler
 
 let _ =
+  Memtrace.trace_if_requested ();
   Sys.catch_break true;
   Timer.init Sys.time;
   let argv = Jsoo_cmdline.normalize_argv ~warn:(warn "%s") Sys.argv in
